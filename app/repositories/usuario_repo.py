@@ -21,4 +21,4 @@ class UsuarioRepository:
     def listar_usuario(self):
         return self.session.query(Usuario).all()
         
-        
+    
