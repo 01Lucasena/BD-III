@@ -19,5 +19,5 @@ def main():
     for usuario in lista_usuarios:
         print(f"Nome: {usuario.nome} - E-mail: {usuario.email} - Senha: {usuario.senha}")
 
-if __name__ == "main":
+if __name__ == "__main__":
     main()
