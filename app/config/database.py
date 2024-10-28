@@ -25,7 +25,7 @@ def get_db():
         yield db
         db.commit() # Se der certo da commit.
     except Exception as erro:
-        db.rollback()
+        db.rollback() # Se der errado desfaz a operação
         raise erro
     finally:
         db.close()
