@@ -18,7 +18,7 @@ class UsuarioRepository:
         self.session.commit()
         self.session.refresh()
 
-    def lista_usuario(self):
+    def listar_usuario(self):
         return self.session.query(Usuario).all()
         
         
