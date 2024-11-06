@@ -43,14 +43,14 @@ class UsuarioService:
         try:
             print("\nAtualizando dados do usuário.\n")
             email_usuario = input("Digite o e-mail do usuário: ")
-            usuario_cadastrado = self.repository.atualizar_usuario(email_usuario)
+            usuario_cadastrado = self.repository.pesquisar_usuario_por_email(email_usuario)
                 
         
             if usuario_cadastrado:
                 usuario_cadastrado.nome = input("Digite seu nome: ")
                 usuario_cadastrado.email = input("Digite seu e-mail: ")
                 usuario_cadastrado.senha = input("Digite sua senha: ")
-                self.repository.atualizar_usuario(usuario_cadastrado)
+                self.repository.salvar_usuario(usuario_cadastrado)
                 print("\nUsuário atualizado com sucesso.")  
 
             else:
@@ -64,13 +64,13 @@ class UsuarioService:
        
     
     def listar_todos_usuarios(self):
-        return self.repository.listar_usuario()
+        return self.repository.listar_usuarios()
     
     def excluir_usuario(self):
         try:
             print("\nExcluindo dados do usuário.\n")
             email_usuario = input("Digite o e-mail do usuário: ")
-            usuario_cadastrado = self.repository.atualizar_usuario(email_usuario)
+            usuario_cadastrado = self.repository.pesquisar_usuario_por_email(email_usuario)
         
             if usuario_cadastrado:
                 senha_usuario = input("Digite a senha do usuário: ")

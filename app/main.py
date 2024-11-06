@@ -3,6 +3,7 @@ from services.usuario_service import UsuarioService
 from repositories.usuario_repo import UsuarioRepository
 from config.database import Session
 import os
+import time
 
 
 def exibir_menu():
@@ -44,16 +45,14 @@ def main():
                 service.atualizar_usuario()
 
             case 4:
-                os.system("cls")
-                
+                os.system("cls||clear")
+                service.excluir_usuario()
+
             case 5:
                 os.system("cls||clear")
-                print("\nListando usuários cadastrados.\n")
-                lista_usuarios = service.listar_todos_usuarios()
-                for usuario in lista_usuarios:
-                    print(
-                        f"Nome: {usuario.nome} - E-mail: {usuario.email} - Senha: {usuario.senha}"
-                    )
+                service.listar_todos_usuarios()
+                time.sleep(3)
+
             case 0:
                 os.system("cls||clear")
                 break
