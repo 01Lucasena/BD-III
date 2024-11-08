@@ -64,7 +64,13 @@ class UsuarioService:
        
     
     def listar_todos_usuarios(self):
-        return self.repository.listar_usuarios()
+        print("\nListando todos os usuários.")
+        lista_usuarios = self.repository.listar_usuarios()
+
+        for usuario in lista_usuarios:
+            print(f"{usuario.nome} - {usuario.email} - {usuario.senha}")
+
+           
     
     def excluir_usuario(self):
         try:

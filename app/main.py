@@ -7,7 +7,7 @@ import time
 
 
 def exibir_menu():
-    print("\nMenu:\n")
+    print("\n=== SENAI SOLUTION ===:\n")
     print("1. Criar Usuário")
     print("2. Pesquisar um usuário")
     print("3. Atualizar dados de um usuário")
@@ -29,7 +29,6 @@ def main():
 
         match opcao:
             case 1:
-                os.system("cls||clear")
                 nome = input("Digite seu nome: ")
                 email = input("Digite seu e-mail: ")
                 senha = input("Digite sua senha: ")
@@ -45,16 +44,13 @@ def main():
                 service.atualizar_usuario()
 
             case 4:
-                os.system("cls||clear")
                 service.excluir_usuario()
 
             case 5:
-                os.system("cls||clear")
                 service.listar_todos_usuarios()
                 time.sleep(3)
 
             case 0:
-                os.system("cls||clear")
                 break
 
             case _:
@@ -62,4 +58,5 @@ def main():
 
 
 if __name__ == "__main__":
+    os.system("cls||clear")
     main()

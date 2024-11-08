@@ -11,7 +11,7 @@ Delete (excluir um usuário)
 No arquivo principal, crie um menu onde o seja possível escolher a ação desejada.
 
 === SENAI SOLUTION === 
- 1 - Adicionar usuário 
+1 - Adicionar usuário 
 2 - Pesquisar um usuário 
 3 - Atualizar dados de um usuário 
 4 - Excluir um usuário 
