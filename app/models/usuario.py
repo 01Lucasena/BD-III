@@ -17,5 +17,29 @@ class Usuario(Base):
         self.nome = nome 
         self.email = email 
         self.senha = senha
+    
+    def __init__(self, nome: str, email: str, senha: str):
+        self.nome = self._verificar_nome(nome)
+        self.email = email
+        self.senha = senha
+    
+    def _verificar_nome_invalido(self, valor):
+        if not isinstance(valor, str):
+            raise TypeError("O nome deve ser um texto.")
+        
+    def _verificar_nome_vazio(self, valor):
+        if not valor.strip():
+            raise TypeError("O nome não pode estar vazio.")
+        
+    def _verificar_nome(self, valor):
+        try:
+            self._verificar_nome_invalido(valor)
+            self._verificar_nome_vazio(valor)
+        except TypeError as erro:
+            print(f"Erro: {erro}")
+        except Exception as erro:
+            print(f"Erro inesperado: {erro}")
+        self.nome = valor
+        return self.nome
 
 Base.metadata.create_all(bind=db) 
