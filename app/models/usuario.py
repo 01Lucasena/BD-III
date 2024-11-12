@@ -1,45 +1,94 @@
 from sqlalchemy import Column, String, Integer
 from sqlalchemy.orm import declarative_base
-from config.database import db
+from app.config.database import db
+
 
 Base = declarative_base()
 
+
 class Usuario(Base):
-    __tablename__= "usuarios"
+    __tablename__ = "usuarios"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     nome = Column(String(150))
     email = Column(String(150))
     senha = Column(String(150))
 
-    # Definindo características da classe
-    def __init__(self,nome = str, email = str, senha = str):
-        self.nome = nome 
-        self.email = email 
-        self.senha = senha
-    
     def __init__(self, nome: str, email: str, senha: str):
         self.nome = self._verificar_nome(nome)
-        self.email = email
-        self.senha = senha
-    
-    def _verificar_nome_invalido(self, valor):
-        if not isinstance(valor, str):
-            raise TypeError("O nome deve ser um texto.")
-        
-    def _verificar_nome_vazio(self, valor):
-        if not valor.strip():
-            raise TypeError("O nome não pode estar vazio.")
-        
+        self.email = self._verificar_email(email)
+        self.senha = self._verificar_senha(senha)
+
+
+    # Métodos
     def _verificar_nome(self, valor):
-        try:
-            self._verificar_nome_invalido(valor)
-            self._verificar_nome_vazio(valor)
-        except TypeError as erro:
-            print(f"Erro: {erro}")
-        except Exception as erro:
-            print(f"Erro inesperado: {erro}")
+        
+        self._verificar_nome_invalido(valor)
+        self._verificar_nome_vazio(valor)
+       
         self.nome = valor
         return self.nome
+        
+    def _verificar_email(self, valor):
+       
+        self._verificar_email_invalido(valor)
+        self._verificar_email_vazio(valor)
+       
+        self.email = valor
+        return self.email
+   
+    def _verificar_senha(self,password):
+        
+        self._verificar_senha_tamanho(password)
+        self._verificar_senha_char_maiusculo(password)
+        self._verificar_senha_tamanho(password)
+        self._verificar_senha_char_maiusculo(password)
+        self._verificar_senha_numero(password)
+        self._verificar_senha_char_especial(password)
 
-Base.metadata.create_all(bind=db) 
+        self.senha = password
+        return self.senha
+       
+    # Métodos Auxiliares
+    def _verificar_nome_vazio(self, valor):
+
+        if not valor.strip():
+            raise TypeError("O nome não deve ficar vazio.")
+
+    def _verificar_nome_invalido(self, valor):
+
+        if not isinstance(valor, str):
+            raise TypeError("O nome deve ser um texto.")
+
+    def _verificar_email_vazio(self, valor):
+       
+        if not valor.strip():
+           raise TypeError("O e-mail não deve ficar vazio.") 
+        
+    def _verificar_email_invalido(self, valor):
+
+        if not isinstance(valor, str):
+            raise TypeError("O e-mail deve ser um texto.")
+        
+    def _verificar_senha_tamanho(self, password):
+        tamanho = len(password)
+
+        if tamanho < 8:
+            raise ValueError("A senha deve ter no mínimo 8 digitos.")
+        
+    def _verificar_senha_char_maiusculo(self, password):
+
+        if password.islower():
+            raise ValueError("A senha deve conter pelo menos uma letra MAIÚSCULA.")
+
+    def _verificar_senha_numero(self, password):
+
+        if password.isalpha():
+            raise ValueError("A senha deve conter pelo menos um NÚMERO.")
+
+    def _verificar_senha_char_especial(self, password):
+
+        if password.isalnum():
+            raise ValueError("A senha deve conter pelo menos um CARACTERE ESPECIAL.") 
+
+Base.metadata.create_all(bind=db)
